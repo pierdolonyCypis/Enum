@@ -1,0 +1,311 @@
+import java.util.Scanner;
+public class Main {
+
+    static int month;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Введіть місяць: - ");
+        String moon = sc.nextLine();
+
+        switch (moon.toLowerCase()) {
+            case "січень":
+                month = 0;
+                break;
+            case "лютий":
+                month = 1;
+                break;
+            case "березень":
+                month = 2;
+                break;
+            case "квітень":
+                month = 3;
+                break;
+            case "травень":
+                month = 4;
+                break;
+            case "червень":
+                month = 5;
+                break;
+            case "липень":
+                month = 6;
+                break;
+            case "серпень":
+                month = 7;
+                break;
+            case "вересень":
+                month = 8;
+                break;
+            case "жовтень":
+                month = 9;
+                break;
+            case "листопад":
+                month = 10;
+                break;
+            case "грудень":
+                month = 11;
+                break;
+            default:
+               throw new InputError("Не правильний ввід!!!");      
+        }
+
+        while (true) {
+            System.out.println("\n---------------------------------------------------------------------------");
+            System.out.println("1: Перевірка, чи є такий місяць?");
+            System.out.println("2: Вивести всі місяці з такою ж порою року");
+            System.out.println("3: Вивести всі місяці які мають таку саму кількість днів");
+            System.out.println("4: Вивести на екран всі місяці які мають меншу кількість днів");
+            System.out.println("5: Вивести на екран всі місяці які мають більшу кількість днів");
+            System.out.println("6: Вивести на екран наступну пору року");
+            System.out.println("7: Вивести на екран попередню пору року");
+            System.out.println("8: Вивести на екран всі місяці які мають парну кількість днів");
+            System.out.println("9: Вивести на екран всі місяці які мають непарну кількість днів");
+            System.out.println("10: Вивести на екран чи введений з консолі місяць має парну кількість днів");
+            System.out.println("0: Вихід з програми");
+            System.out.println("---------------------------------------------------------------------------");
+            System.out.println("Введіть цифру: ");
+            int input = sc.nextInt();
+
+            switch (input) {
+                case 1: {
+                    monthCheck();
+                    break;
+                }
+                case 2: {
+                    ShowEqualOfSeason();
+                    break;
+                }
+                case 3: {
+                    ShowEqualDayOfMonth();
+                    break;
+                }
+                case 4: {
+                    ShowAllMonthsLessOfDays();
+                    break;
+                }
+                case 5:{
+                      ShowAllMonthsMoreOfDays();
+                      break;
+                }
+                case 6: {
+                    ShowNextSeason();
+                    break;
+                }
+                case 7:{
+                    ShowPreviousSeason();
+                    break;
+                }
+                case 8: {
+                    System.out.println("Парні місяці");
+                    ShowMonthOfEvenDays();
+                    break;
+                }
+                case 9:{
+                    System.out.println("Не парні місяці");
+                    ShowMonthOfOddDays();
+                    break;
+                }
+                case 10:{
+                    OrEvenDay();
+                    break;
+                }
+                case 0: {
+                    System.exit(0);
+                    break;
+                }
+                default: {
+                    throw new NullPointerException();
+
+                }
+            }
+        }
+    }
+
+
+    public static void monthCheck(){
+        if(month == 0){
+            System.out.println("так, місяць січень існує");
+        }
+        if(month == 1){
+            System.out.println("так, місяць лютий існує");
+        }
+        if(month == 2){
+            System.out.println("так, місяць березень існує");
+        }
+        if(month == 3){
+            System.out.println("так, місяць квітень існує");
+        }
+        if(month == 4){
+            System.out.println("так, місяць травень існує");
+        }
+        if(month == 5){
+            System.out.println("так, місяць червень існує");
+        }
+        if(month == 6){
+            System.out.println("так, місяць липень існує");
+        }
+        if(month == 7){
+            System.out.println("так, місяць серпень існує");
+        }
+        if(month == 8){
+            System.out.println("так, місяць вересень існує");
+        }
+        if(month == 9){
+            System.out.println("так, місяць жовтень існує");
+        }
+        if(month == 10){
+            System.out.println("так, місяць листопад існує");
+        }
+        if(month == 11){
+            System.out.println("так, місяць грудень існує");
+        }
+    }  // 1 пункт
+
+    public static void ShowEqualOfSeason(){
+        if (month == 0 | month == 1 | month == 11){
+           for(Moons m: Moons.values()){
+               if(m.getSeason() == Season.WINTER){
+                   System.out.println(m);
+               }
+           }
+        }
+        if (month == 2 | month == 3 | month == 4){
+            for(Moons m: Moons.values()){
+                if(m.getSeason() == Season.SPRING){
+                    System.out.println(m);
+                }
+            }
+        }
+        if (month == 5 | month == 6 | month == 7){
+            for(Moons m: Moons.values()){
+                if(m.getSeason() == Season.SUMMER){
+                    System.out.println(m);
+                }
+            }
+        }
+        if (month == 8 | month == 9 | month == 10){
+            for(Moons m: Moons.values()){
+                if(m.getSeason() == Season.AUTUMN){
+                    System.out.println(m);
+                }
+            }
+        }
+    } // 2 пункт
+
+    public static void ShowEqualDayOfMonth(){
+        if(month == 0 | month == 2 | month == 4 | month == 6 | month == 7 | month == 9 | month == 11){
+            ShowMonthOfOddDays();
+        }
+       if(month == 3 | month == 5 | month == 8 | month == 10){
+           System.out.println(Moons.APRIL+", "+Moons.JUNE+", "+
+                   Moons.SEPTEMBER+", "+Moons.NOVEMBER);
+       }if(month == 1){
+           System.out.println(Moons.FEBRUARY);
+       }
+    } // 3 пункт
+
+    public static void ShowAllMonthsLessOfDays(){
+        if(month == 0 | month == 2 | month == 4 | month == 6 | month == 7 | month == 9 | month == 11){
+            for(Moons m: Moons.values()){
+                if(m.getDay() < 31){
+                    System.out.println(m);
+                }
+            }
+        }if(month == 3 | month == 5 | month == 10){
+            for(Moons m: Moons.values()){
+                if(m.getDay() < 30){
+                    System.out.println(m);
+                }
+            }
+        }else if(month == 1){
+            System.out.println("Менше ніж 28 днів у місяці не буває!");
+        }
+    } // 4 пункт
+
+    public static void ShowAllMonthsMoreOfDays(){
+        if(month == 3 | month == 5 | month == 10){
+            for(Moons m: Moons.values()){
+                if(m.getDay() > 30){
+                    System.out.println(m);
+                }
+            }
+        }
+        if(month == 1){
+            for(Moons m: Moons.values()){
+                if(m.getDay() > 28){
+                    System.out.println(m);
+                }
+            }
+        }
+        else if(month == 0 | month == 2 | month == 4 | month == 6 | month == 7 | month == 9 | month == 11) {
+            System.out.println("Більше ніж 31 день у місяці не буває!");
+        }
+        } // 5 пункт
+
+    public static void ShowNextSeason(){
+        if(month == 0 | month == 1 | month == 11){
+            System.out.println("Наступна пора року після зими - "+Season.SPRING);
+        }
+        if(month == 2 | month == 3 | month == 4){
+            System.out.println("Наступна пора року після весни - "+Season.SUMMER);
+        }
+        if(month == 5 | month == 6 | month == 7){
+            System.out.println("Наступна пора року після літа - "+Season.AUTUMN);
+        }
+        if(month == 8 | month == 9 | month == 10){
+            System.out.println("Наступна пора року після осені - "+Season.WINTER);
+        }
+    }  // 6 пункт
+
+    public static void ShowPreviousSeason(){
+        if(month == 0 | month == 1 | month == 11){
+            System.out.println("Попередня пора року - "+Season.AUTUMN);
+        }
+        if(month == 2 | month == 3 | month == 4){
+            System.out.println("Попередня пора року - "+Season.WINTER);
+        }
+        if(month == 5 | month == 6 | month == 7){
+            System.out.println("Попередня пора року - "+Season.SPRING);
+        }
+        if(month == 8 | month == 9 | month == 10){
+            System.out.println("Попередня пора року - "+Season.SUMMER);
+        }
+    } // 7 пункт
+
+    public static void ShowMonthOfEvenDays(){
+        for(Moons m: Moons.values()){
+            if(m.getDay() == 28 | m.getDay() == 30) {
+                System.out.println(m);
+            }
+        }
+    } // 8 пункт
+
+    public static void ShowMonthOfOddDays(){
+        for(Moons m: Moons.values()){
+            if(m.getDay() == 31) {
+                System.out.println(m);
+            }
+        }
+    } // 9 пункт
+
+    public static void OrEvenDay(){
+        boolean isTrue = false;
+        if(month == 1 | month == 3 | month == 5 | month == 8 | month == 10) {
+            for (Moons m : Moons.values()) {
+                if (m.getDay() == 28 | m.getDay() == 30) {
+                    isTrue = true;
+
+                }
+            }
+            System.out.println("Так має парну к-сть днів");
+        }else{
+            System.out.println("Ні! Не має марну к-сть днів");
+        }
+        System.out.println(isTrue);
+
+    } // 10 пункт
+}
+
+
+
+
